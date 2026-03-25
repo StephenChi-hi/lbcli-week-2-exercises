@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Import helper functions
-source .github/functions.sh
+source ../.github/functions.sh
 
 # Week Two Exercise: Advanced Bitcoin Transaction
 # This script combines concepts from previous exercises into a comprehensive challenge
@@ -218,10 +218,10 @@ check_cmd "Transaction decoding" "DECODED_TX" "$DECODED_TX"
 VERIFY_RBF=$(echo "$DECODED_TX" | jq '[.vin[].sequence] | map(. < 4294967295) | any')
 check_cmd "RBF verification" "VERIFY_RBF" "$VERIFY_RBF"
 
-VERIFY_PAYMENT=$(echo "$DECODED_TX" | jq -r '.vout[] | select(.scriptPubKey.addresses[0]=="'"$PAYMENT_ADDRESS"'") | .value')
+VERIFY_PAYMENT=$(echo "$DECODED_TX" | jq '.vout[] | select(.value == '"$PAYMENT_BTC"') | .value')
 check_cmd "Payment verification" "VERIFY_PAYMENT" "$VERIFY_PAYMENT"
 
-VERIFY_CHANGE=$(echo "$DECODED_TX" | jq -r '.vout[] | select(.scriptPubKey.addresses[0]=="'"$CHANGE_ADDRESS"'") | .value')
+VERIFY_CHANGE=$(echo "$DECODED_TX" | jq '.vout[] | select(.value == '"$CHANGE_BTC"') | .value')
 check_cmd "Change verification" "VERIFY_CHANGE" "$VERIFY_CHANGE"
 
 echo "Verification Results:"
