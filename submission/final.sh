@@ -324,7 +324,7 @@ CHILD_OUTPUTS='{"'$CHILD_RECIPIENT'":'$CHILD_SEND_BTC'}'
 check_cmd "Child output creation" "CHILD_OUTPUTS" "$CHILD_OUTPUTS"
 
 # STUDENT TASK: Create the raw child transaction
-CHILD_RAW_TX=
+CHILD_RAW_TX=$(bitcoin-cli -regtest createrawtransaction "$CHILD_INPUTS" "$CHILD_OUTPUTS")
 check_cmd "Child transaction creation" "CHILD_RAW_TX" "$CHILD_RAW_TX"
 
 echo "Successfully created child transaction with higher fee!"
@@ -402,6 +402,7 @@ echo "These are advanced Bitcoin transaction concepts that form the foundation"
 echo "of Bitcoin's transaction capabilities and fee market."
 echo ""
 echo "Ready for real-world Bitcoin development!"
+
 
 # Output the final transaction hex - useful for verification
 echo $TIMELOCK_TX 
