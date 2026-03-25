@@ -14,7 +14,7 @@ total_value=$(bitcoin-cli -regtest decoderawtransaction "$raw_tx" | jq '[.vout[]
 
 # output value total - 20,000 satoshi fee
 fee=20000
-output_value=$(echo "scale=8; ($total_value - $fee) / 100000000" | bc)
+output_value=$(echo "scale=8; ($total_value - $fee) / 100000000" | bc | sed 's/^\./0./')
 
 # inputs 
 inputs=$(bitcoin-cli -regtest decoderawtransaction "$raw_tx" | jq -c '[.vout | to_entries[] | {"txid":"'$txid'","vout":.key}]')
