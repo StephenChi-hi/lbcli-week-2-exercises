@@ -10,7 +10,6 @@ recipient_address="2MvLcssW49n9atmksjwg2ZCMsEMsoj3pzUP"
 txid=$(bitcoin-cli -regtest decoderawtransaction "$raw_tx" | jq -r .txid)
 
 #  inputs with RBF-enabled sequence numbers (< 4294967294)
-inputs=$(bitcoin-cli -regtest decoderawtransaction "$raw_tx" | jq -c '[.vout | to_entries[] | {"txid":"'$txid'","vout":.key,"sequence":1}]')
+inputs=$(bitcoin-cli -regtest  decoderawtransaction "$raw_tx" | jq -c '[.vout | to_entries[] | {"txid":"'$txid'","vout":.key,"sequence":1}]')
 
-#  raw transaction with RBF enabled
-bitcoin-cli -regtest createrawtransaction "$inputs" '{"'$recipient_address'":0.2}'
+bitcoin-cli -regtest createrawtransaction  "$inputs" '{"'$recipient_address'":0.2}'

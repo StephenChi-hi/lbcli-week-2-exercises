@@ -49,7 +49,7 @@ echo ""
 
 # STUDENT TASK: Decode the transaction to get the TXID
 # WRITE YOUR SOLUTION BELOW:
-TXID=$(bitcoin-cli -regtest decoderawtransaction "$BASE_TX" | jq -r .txid) 
+TXID=$(bitcoin-cli -regtest decoderawtransaction "$BASE_TX" | jq -r .txid ) 
 check_cmd "Transaction decoding" "TXID" "$TXID"
 
 echo "Transaction ID: $TXID"
@@ -91,7 +91,7 @@ UTXO_TXID=$TXID
 UTXO_VOUT_INDEX=$(bitcoin-cli -regtest decoderawtransaction "$BASE_TX" | jq '.vout | to_entries[] | select(.value.value * 100000000 >= 15000000) | .key' | head -n1)
 check_cmd "UTXO vout selection" "UTXO_VOUT_INDEX" "$UTXO_VOUT_INDEX"
 
-UTXO_VALUE=$(bitcoin-cli -regtest decoderawtransaction "$BASE_TX" | jq ".vout[$UTXO_VOUT_INDEX].value * 100000000 | round")
+UTXO_VALUE=$(bitcoin-cli  -regtest decoderawtransaction "$BASE_TX" | jq ".vout[$UTXO_VOUT_INDEX].value * 100000000 | round")
 check_cmd "UTXO value extraction" "UTXO_VALUE" "$UTXO_VALUE"
 
 echo "Selected UTXO:"
