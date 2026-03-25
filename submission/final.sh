@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Import helper functions
-source ../.github/functions.sh
+source .github/functions.sh
 
 # Week Two Exercise: Advanced Bitcoin Transaction
 # This script combines concepts from previous exercises into a comprehensive challenge
